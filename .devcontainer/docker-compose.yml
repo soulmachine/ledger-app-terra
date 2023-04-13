@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  app:
+    # Using a Dockerfile is optional, but included for completeness.
+    image: zondax/builder-bolos:latest
+    environment:
+      - SCP_PRIVKEY=ff701d781f43ce106f72dc26a46b6a83e053b5d07bb3d4ceab79c91ca822a66b
+      - BOLOS_SDK=/project/deps/nanos-secure-sdk
+      - BOLOS_ENV=/opt/bolos
+      - SUPPORT_SR25519=
+      - SUBSTRATE_PARSER_FULL=
+      - DISABLE_PREVIOUS=
+      - DISABLE_CURRENT=
+      - COIN=
+      - APP_TESTING=
+    user: 501:20
+    # Overrides default command so things don't shut down after the process ends.
+    # command: /bin/bash -c "sleep infinity"
+    entrypoint: /bin/bash
+    # command: sleep infinity
+    tty: true
+    volumes:
+      - ..:/project:cached
+    
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+    # Uncomment the next line to use a non-root user for all processes - See https://aka.ms/vscode-remote/containers/non-root for details.
+    # user: vscode
+
+    # Uncomment the next four lines if you will use a ptrace-based debugger like C++, Go, and Rust.
+    # cap_add:
+    #   - SYS_PTRACE
+    # security_opt:
+    #   - seccomp:unconfined
+ 

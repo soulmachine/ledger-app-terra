@@ -95,6 +95,13 @@ OUTPUT_ELF ?= $(CURDIR)/output/app_s2.elf
 OUTPUT_INSTALLER:= $(CURDIR)/pkg/installer_s2.sh
 endif
 
+ifeq ($(TARGET_NAME),TARGET_STAX)
+APP_LOAD_PARAMS += --appFlags 0x200
+ICONNAME:=$(CURDIR)/stax_icon32.gif
+OUTPUT_ELF ?= $(CURDIR)/output/app_stax.elf
+OUTPUT_INSTALLER:= $(CURDIR)/pkg/installer_stax.sh
+endif
+
 $(info TARGET_NAME  = [$(TARGET_NAME)])
 $(info ICONNAME  = [$(ICONNAME)])
 

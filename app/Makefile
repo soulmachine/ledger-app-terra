@@ -145,13 +145,14 @@ DEFINES       += HAVE_BAGL_FONT_OPEN_SANS_LIGHT_16PX
 DEFINES       += HAVE_UX_FLOW
 endif
 
-ifeq ($(TARGET_NAME),TARGET_NANOX)
-# X specific
-DEFINES       += HAVE_BLE
-DEFINES       += HAVE_BLE_APDU BLE_COMMAND_TIMEOUT_MS=2000
-
-SDK_SOURCE_PATH  += lib_blewbxx lib_blewbxx_impl
+# X and Stax specific
+# copied from https://github.com/LedgerHQ/ledger-secure-sdk/blob/master/Makefile.standard_app#L22
+ifeq ($(TARGET_NAME),$(filter $(TARGET_NAME),TARGET_NANOX TARGET_STAX))
+DEFINES += HAVE_BLE BLE_COMMAND_TIMEOUT_MS=2000 HAVE_BLE_APDU
+DEFINES += BLE_SEGMENT_SIZE=32
+SDK_SOURCE_PATH += lib_blewbxx lib_blewbxx_impl
 endif
+
 # App specific
 
 #Feature temporarily disabled

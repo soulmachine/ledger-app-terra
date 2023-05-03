@@ -197,7 +197,13 @@ void app_init() {
 #ifdef HAVE_BLE
     // Enable Bluetooth
     BLE_power(0, NULL);
+
+#if defined(TARGET_NANOX)
     BLE_power(1, "Nano X");
+#elif defined(TARGET_STAX)
+    BLE_power(1, "Stax");
+#endif
+
 #endif // HAVE_BLE
 
 }
